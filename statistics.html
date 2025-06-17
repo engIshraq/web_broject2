@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تحدي الأسئلة | الإحصائيات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif;}
+    body {
+      background: linear-gradient(to bottom right, #0f4c75, #3282b8);
+      color: white;
+    }
+    header {
+      background-color: #1b262c;
+      padding: 10px 20px;
+      display: flex;
+      align-items:center;
+      justify-content: space-between;
+    }
+    header img {
+      width: 110px;
+    }
+    header nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    main {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    th {
+      background-color: #1b262c;
+    }
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.jpg" alt="Logo">
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="statistics.html">الإحصائيات</a>
+      <a href="the team.html">الفريق المنفذ</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>إحصائيات اللاعبين</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>إجابات صحيحة</th>
+          <th>إجابات خاطئة</th>
+          <th>الزمن المستغرق (ثواني)</th>
+        </tr>
+      </thead>
+      <tbody id="statsBody">
+        <!-- البيانات ستُملأ تلقائيًا -->
+      </tbody>
+    </table>
+  </main>
+<button onclick="clearStats()" style="margin-bottom: 20px; background-color: #ff4d4d; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+  🗑 مسح الإحصائيات
+</button>
+ <script>
+  // نحفظ القيم من اللعبة
+  const name = localStorage.getItem("quizUsername") || "لاعب";
+  const correct = parseInt(localStorage.getItem("correctAnswers")) || 0;
+  const wrong = parseInt(localStorage.getItem("wrongAnswers")) || 0;
+  const time = parseInt(localStorage.getItem("timeTaken")) || 0;
+
+  // نحاول نحصل على الإحصائيات الموجودة أو نبدأ جديدة
+  let stats = JSON.parse(sessionStorage.getItem("playersStats")) || [];
+
+  // نمنع التكرار بنفس الجلسة
+  const alreadyExists = stats.some(player =>
+    player.name === name &&
+    player.correct === correct &&
+    player.wrong === wrong &&
+    player.time === time
+  );
+
+  if (!alreadyExists) {
+    stats.push({ name, correct, wrong, time });
+    sessionStorage.setItem("playersStats", JSON.stringify(stats));
+  }
+
+  // نعرض الإحصائيات في الجدول
+  const tbody = document.getElementById("statsBody");
+  stats.forEach(player => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${player.name}</td>
+      <td>${player.correct}</td>
+      <td>${player.wrong}</td>
+      <td>${player.time}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  // ما في داعي نضيف أي كود لمسح، لأن sessionStorage ينمسح تلقائياً عند غلق الصفحة
+</script>
+</body>
+</html>

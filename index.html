@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تحدي الأسئلة | إدخال الاسم</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif;}
+    body {
+      background: linear-gradient(to bottom right, #0f4c75, #3282b8);
+      color: #fff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100vh;
+    }
+    .navbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: rgb(0, 0, 0);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar img {
+      height: 50px;
+    }
+    .navbar nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+    }
+    input {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      width: 250px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1b262c;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #0f4c75;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img src="logo.jpg" alt="شعار الجامعة" />
+    <nav>
+      <a href="main.html">الرئيسية</a>
+      <a href="statistics.html">الإحصائيات</a>
+      <a href="the team.html">الفريق المنفذ</a>
+    </nav>
+  </div>
+
+  <h1>ادخل اسمك لبدء التحدي</h1>
+  <input type="text" id="username" placeholder="اسمك الكامل" />
+  <button onclick="startGame()">ابدأ</button>
+
+  <script>
+    function startGame() {
+      const name = document.getElementById("username").value.trim();
+      if (name) {
+        localStorage.setItem("quizUsername", name);
+        window.location.href = "quiz.html";
+      } else {
+        alert("رجاءً أدخل اسمك أولاً.");
+      }
+    }
+  </script>
+</body>
+</html>

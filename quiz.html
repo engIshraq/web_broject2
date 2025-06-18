@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تحدي الأسئلة | الأسئلة</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
+    @media (max-width: 768px) {
+  nav ul {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  nav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
+}
     * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif;}
     body {
+     
       background: linear-gradient(to bottom right, #0f4c75, #3282b8);
       color: white;
       padding: 0;
       margin: 0;
     }
     header {
-      background-color: #1b262c;
+      background-color: #000000;
       padding: 10px 20px;
+      
       display: flex;
       align-items:center;
       justify-content: space-between;
@@ -87,7 +101,7 @@
   <header>
     <img src="logo.jpg" alt="Logo">
     <nav>
-      <a href="index.html">الرئيسية</a>
+      <a href="main.html">الرئيسية</a>
       <a href="statistics.html">الإحصائيات</a>
       <a href="the team.html">الفريق المنفذ</a>
     </nav>
@@ -122,7 +136,6 @@
       {q: "كم عدد ألوان قوس قزح؟", options: ["5", "6", "7", "8"], answer: 2},
       {q: "من مؤلف رواية 'البؤساء'؟", options: ["ديكنز", "شكسبير", "هوغو", "تولستوي"], answer: 2}
     ];
-
     let current = 0;
     let correct = 0;
     let wrong = 0;
@@ -131,9 +144,7 @@
       timer++;
       document.getElementById("timer").textContent = timer;
     }, 1000);
-
-    document.getElementById("welcome").textContent =` مرحباً ${localStorage.getItem("quizUsername") || "ضيف"}!`;
-
+    document.getElementById("welcome").textContent =` مرحباً ${localStorage.getItem("quizUsername") || "لاعب"}!`;
     function loadQuestion() {
       const q = questions[current];
       document.getElementById("question").textContent = q.q;
@@ -146,7 +157,6 @@
         optionsContainer.appendChild(btn);
       });
     }
-
     function checkAnswer(selected) {
       const correctIndex = questions[current].answer;
       const buttons = document.querySelectorAll("#options button");
@@ -159,11 +169,9 @@
         correct++;
         confettiEffect();
       } else wrong++;
-
       document.getElementById("correctCount").textContent = correct;
       document.getElementById("wrongCount").textContent = wrong;
     }
-
     function nextQuestion() {
       if (current < questions.length - 1) {
         current++;
@@ -175,14 +183,12 @@
         window.location.href = "result.html";
       }
     }
-
     function prevQuestion() {
       if (current > 0) {
         current--;
         loadQuestion();
       }
     }
-
     function confettiEffect() {
   const container = document.createElement("div");
   container.style.position = "fixed";
@@ -190,30 +196,39 @@
   container.style.left = 0;
   container.style.width = "100%";
   container.style.height = "100%";
+  
   container.style.pointerEvents = "none";
+ 
   container.style.zIndex = 9999;
+   
   document.body.appendChild(container);
 
   for (let i = 0; i < 100; i++) {
+    
     const star = document.createElement("div");
     star.textContent = "⭐";
+    
     star.style.position = "absolute";
+    
     star.style.fontSize = `${Math.random() * 24 + 12}px`;
+    
     star.style.left = `${Math.random() * 100}%`;
     star.style.top = `${Math.random() * 100}%`;
+    
     star.style.opacity = 1;
+    
     star.style.transition = "transform 1s ease-out, opacity 1.2s ease-in";
     container.appendChild(star);
-
+   
     setTimeout(() => {
-      star.style.transform = `translateY(${Math.random() * -200 - 100}px) rotate(${Math.random() * 360}deg)`;
+      star.style.transform= `translateY(${Math.random() * -200 - 100}px) rotate(${Math.random() * 360}deg)`;
       star.style.opacity = 0;
     }, 10);
   }
-
+   
   setTimeout(() => container.remove(), 1500);
 }
-
+   
     window.onload = loadQuestion;
   </script>
 </body>

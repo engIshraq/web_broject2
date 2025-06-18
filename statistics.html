@@ -6,13 +6,25 @@
   <title>تحدي الأسئلة | الإحصائيات</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
+    @media (max-width: 768px) {
+  nav ul {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  nav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
+}
     * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif;}
     body {
       background: linear-gradient(to bottom right, #0f4c75, #3282b8);
       color: white;
     }
     header {
-      background-color: #1b262c;
+      background-color: #000000;
       padding: 10px 20px;
       display: flex;
       align-items:center;
@@ -58,7 +70,7 @@
   <header>
     <img src="logo.jpg" alt="Logo">
     <nav>
-      <a href="index.html">الرئيسية</a>
+      <a href="main.html">الرئيسية</a>
       <a href="statistics.html">الإحصائيات</a>
       <a href="the team.html">الفريق المنفذ</a>
     </nav>
@@ -76,7 +88,6 @@
         </tr>
       </thead>
       <tbody id="statsBody">
-        <!-- البيانات ستُملأ تلقائيًا -->
       </tbody>
     </table>
   </main>
@@ -84,16 +95,13 @@
   🗑 مسح الإحصائيات
 </button>
  <script>
-  // نحفظ القيم من اللعبة
   const name = localStorage.getItem("quizUsername") || "لاعب";
   const correct = parseInt(localStorage.getItem("correctAnswers")) || 0;
   const wrong = parseInt(localStorage.getItem("wrongAnswers")) || 0;
   const time = parseInt(localStorage.getItem("timeTaken")) || 0;
 
-  // نحاول نحصل على الإحصائيات الموجودة أو نبدأ جديدة
   let stats = JSON.parse(sessionStorage.getItem("playersStats")) || [];
 
-  // نمنع التكرار بنفس الجلسة
   const alreadyExists = stats.some(player =>
     player.name === name &&
     player.correct === correct &&
@@ -106,7 +114,6 @@
     sessionStorage.setItem("playersStats", JSON.stringify(stats));
   }
 
-  // نعرض الإحصائيات في الجدول
   const tbody = document.getElementById("statsBody");
   stats.forEach(player => {
     const row = document.createElement("tr");
@@ -119,7 +126,6 @@
     tbody.appendChild(row);
   });
 
-  // ما في داعي نضيف أي كود لمسح، لأن sessionStorage ينمسح تلقائياً عند غلق الصفحة
 </script>
 </body>
 </html>

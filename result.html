@@ -6,6 +6,18 @@
   <title>تحدي الأسئلة | النتائج</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
+    @media (max-width: 768px) {
+  nav ul {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  nav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
+}
     body {
       font-family: 'Cairo', sans-serif;
       background: linear-gradient(to bottom right, #0f4c75, #3282b8);
@@ -15,7 +27,6 @@
       text-align: center;
     }
 
-    /* شريط التنقل */
     .navbar {
       background-color: #000;
       display: flex;
@@ -79,17 +90,17 @@
 </head>
 <body>
 
-  <!-- الشريط العلوي -->
+ 
   <div class="navbar">
     <img src="logo.jpg" alt="شعار الجامعة">
     <div class="nav-links">
-      <a href="index.html">الرئيسية</a>
+      <a href="main.html">الرئيسية</a>
       <a href="statistics.html">الإحصائيات</a>
       <a href="team.html">الفريق المنفذ</a>
     </div>
   </div>
 
-  <!-- نتائج -->
+ 
   <div class="box">
     <h1>النتائج النهائية</h1>
     <p id="usernameResult"></p>
